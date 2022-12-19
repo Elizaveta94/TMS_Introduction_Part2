@@ -19,7 +19,7 @@ public class CarControllerServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-       carService = new CarService();
+        carService = new CarService();
     }
 
     @Override
@@ -33,7 +33,6 @@ public class CarControllerServlet extends HttpServlet {
         ServletOutputStream outputStream = resp.getOutputStream();
         outputStream.println(res);
         outputStream.close();
-
     }
 
     @Override
@@ -52,7 +51,6 @@ public class CarControllerServlet extends HttpServlet {
             ServletOutputStream outputStream = resp.getOutputStream();
             outputStream.println(res);
             outputStream.close();
-
         }
     }
 
