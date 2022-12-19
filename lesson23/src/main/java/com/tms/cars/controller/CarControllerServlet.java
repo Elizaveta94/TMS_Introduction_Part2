@@ -16,15 +16,10 @@ public class CarControllerServlet extends HttpServlet {
 
     private CarService carService;
 
-    public CarControllerServlet(CarService carService) {
-        this.carService = carService;
-    }
-
-
     @Override
     public void init() throws ServletException {
         super.init();
-        CarService carService = new CarService();
+       carService = new CarService();
     }
 
     @Override
@@ -44,7 +39,7 @@ public class CarControllerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String idParam = req.getParameter("id");
-        if (idParam != null) {
+        if (idParam == null) {
             List<Car> cars = carService.getAllCars();
             String res = Arrays.toString(cars.toArray());
             ServletOutputStream outputStream = resp.getOutputStream();
