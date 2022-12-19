@@ -19,12 +19,6 @@ public class CarControllerServlet extends HttpServlet {
 
     private CarService carService;
 
-    private void service(HttpServletResponse resp, String res) throws IOException {
-        ServletOutputStream outputStream = resp.getOutputStream();
-        outputStream.println(res);
-        outputStream.close();
-    }
-
     @Override
 
     public void init() throws ServletException {
@@ -40,7 +34,7 @@ public class CarControllerServlet extends HttpServlet {
         Car car = new Car(brand, model, id);
         car = carService.saveCar(car);
         String res = car.toString();
-        service(resp, res);
+        writeResponseBody(resp, res);
     }
 
     @Override
@@ -49,12 +43,12 @@ public class CarControllerServlet extends HttpServlet {
         if (idParam == null) {
             List<Car> cars = carService.getAllCars();
             String res = Arrays.toString(cars.toArray());
-            service(resp, res);
+            writeResponseBody(resp, res);
         } else {
             long id = Long.valueOf(idParam);
             Car car = carService.getCar(id);
             String res = car.toString();
-            service(resp, res);
+            writeResponseBody(resp, res);
         }
         resp.addCookie(new Cookie("time", LocalDateTime.now().toString()));
     }
@@ -67,7 +61,7 @@ public class CarControllerServlet extends HttpServlet {
         Car car = new Car(brand, model, id);
         car = carService.updateCar(car);
         String res = car.toString();
-        service(resp, res);
+        writeResponseBody(resp, res);
     }
 
     @Override
@@ -75,6 +69,12 @@ public class CarControllerServlet extends HttpServlet {
         long id = Long.parseLong(req.getParameter("id"));
         carService.deleteCar(id);
         String res = String.valueOf(id);
-        service(resp, res);
+        writeResponseBody(resp, res);
+    }
+
+    private void writeResponseBody(HttpServletResponse resp, String res) throws IOException {
+        ServletOutputStream outputStream = resp.getOutputStream();
+        outputStream.println(res);
+        outputStream.close();
     }
 }
