@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
-
 public class CarControllerServlet extends HttpServlet {
 
     private CarService carService;
@@ -50,7 +49,7 @@ public class CarControllerServlet extends HttpServlet {
             String res = car.toString();
             writeResponseBody(resp, res);
         }
-        resp.addCookie(new Cookie("time", LocalDateTime.now().toString()));
+
     }
 
     @Override
@@ -72,9 +71,16 @@ public class CarControllerServlet extends HttpServlet {
         writeResponseBody(resp, res);
     }
 
+    @Override
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.addCookie(new Cookie("time", LocalDateTime.now().toString()));
+        super.service(req, resp);
+    }
+
     private void writeResponseBody(HttpServletResponse resp, String res) throws IOException {
         ServletOutputStream outputStream = resp.getOutputStream();
         outputStream.println(res);
         outputStream.close();
     }
+
 }
