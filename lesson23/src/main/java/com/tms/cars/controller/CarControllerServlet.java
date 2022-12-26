@@ -19,14 +19,15 @@ public class CarControllerServlet extends HttpServlet {
     private CarService carService;
 
     @Override
-
     public void init() throws ServletException {
-        super.init();
         carService = new CarService();
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (req.getParameter("id") == null) {
+            throw new ServletException("Enter id");
+        }
         long id = Long.valueOf(req.getParameter("id"));
         String brand = req.getParameter("brand");
         String model = req.getParameter("model");
@@ -46,7 +47,7 @@ public class CarControllerServlet extends HttpServlet {
         } else {
             long id = Long.valueOf(idParam);
             Car car = carService.getCar(id);
-            String res = car.toString();
+            String res = car == null ? "car not found" : car.toString();
             writeResponseBody(resp, res);
         }
 
@@ -54,6 +55,9 @@ public class CarControllerServlet extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (req.getParameter("id") == null) {
+            throw new ServletException("Enter id");
+        }
         long id = Long.valueOf(req.getParameter("id"));
         String brand = req.getParameter("brand");
         String model = req.getParameter("model");
