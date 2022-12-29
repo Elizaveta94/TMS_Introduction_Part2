@@ -11,6 +11,11 @@
     <title>CARS</title>
 </head>
 <body>
+<style>
+   body {
+    background: url(https://klike.net/uploads/posts/2019-05/medium/1559021804_2.jpg);
+   }
+  </style>
 <div class="container">
     <nav class="navbar bg-body-tertiary bg-success-subtle">
         <div class="container-fluid">
