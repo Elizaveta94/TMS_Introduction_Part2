@@ -11,6 +11,13 @@
     <title>CARS</title>
 </head>
 <body>
+<div class="container">
+    <nav class="navbar bg-body-tertiary bg-success-subtle">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">Car Base</span>
+        </div>
+    </nav>
+
 <form id="contacts" method="GET" action="search">
       <input type="text" name="id" placeholder="Enter car's id" />
       <input class="btn btn-success" type="submit" value="Search">
