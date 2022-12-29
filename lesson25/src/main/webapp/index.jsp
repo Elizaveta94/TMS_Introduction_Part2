@@ -15,6 +15,16 @@
       <input type="text" name="id" placeholder="Enter car's id" />
       <input class="btn btn-success" type="submit" value="Search">
 </form>
+<form id="contacts" method="POST" action="delete">
+      <input type="text" name="id" placeholder="Enter car's id" />
+      <input class="btn btn-danger" name ="delete" type="submit" value="Delete car">
+</form>
+<form id="contacts" method="POST" action="create">
+      <input type="text" name="id" placeholder="Enter car's id"/>
+      <input type="text" name="brand" placeholder="Enter car's brand"/>
+      <input type="text" name="model" placeholder="Enter car's model"/>
+      <input class="btn btn-primary" type="submit" value="Create car">
+</form>
 
 <table class="table table-success table-striped"">
   <thead>
@@ -34,8 +44,8 @@
                 out.println("<td>" + car.getBrand()+ "</td>");
                 out.println("<td>" + car.getModel() + "</td>");
                 out.println("<td>" +
-                "<form action= \"delete\" method=\"DELETE\">" +
-               "<input class=\"btn btn-danger\" type=\"submit\" name=\"Delete car\" value=\"Delete\"/>" +
+                "<form action= \"delete\" method=\"POST\">" +
+               "<input class=\"btn btn-danger\" type=\"submit\" name=\"delete\" value=\"Delete\"/>" +
                "<input type=\"hidden\" name=\"id\" value=\"" + car.getId() + "\"/>" +
                "</form></td></tr>");
 }
