@@ -20,13 +20,7 @@ public class CarService {
     }
 
     public Car getCar(long id) {
-
-        for (Car car : carsStorage) {
-            if (car.getId() == id) {
-                return car;
-            }
-        }
-        return null;
+        return  carsStorage.stream().filter(car -> car.getId() == id).findFirst().get();
     }
 
     public Car saveCar(Car car) {
