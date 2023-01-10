@@ -20,12 +20,7 @@ import java.util.List;
 @WebServlet("/")
 public class CarControllerServlet extends HttpServlet {
 
-    private CarService carService;
-
-    @Override
-    public void init() throws ServletException {
-        carService = new CarService();
-    }
+    private CarService carService = new CarService();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
