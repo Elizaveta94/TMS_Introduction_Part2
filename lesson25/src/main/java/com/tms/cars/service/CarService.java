@@ -6,6 +6,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CarService {
+    private static CarService instance;
+
+    private CarService() {
+    }
+
+    public static CarService getInstance() {
+        if (instance == null) {
+            instance = new CarService();
+        }
+        return instance;
+    }
+
     private final static List<Car> carsStorage = new ArrayList<>();
 
     static {
@@ -27,13 +39,14 @@ public class CarService {
         carsStorage.add(new Car("BMW", "X5", 16L));
     }
 
+
     public List<Car> getAllCars() {
         return carsStorage;
 
     }
 
     public Car getCar(long id) {
-        return  carsStorage.stream().filter(car -> car.getId() == id).findFirst().get();
+        return carsStorage.stream().filter(car -> car.getId() == id).findFirst().get();
     }
 
     public Car saveCar(Car car) {
