@@ -13,7 +13,11 @@ public class CarService {
 
     public static CarService getInstance() {
         if (instance == null) {
-            instance = new CarService();
+            synchronized (CarService.class) {
+                if (instance == null) {
+                    instance = new CarService();
+                }
+            }
         }
         return instance;
     }
