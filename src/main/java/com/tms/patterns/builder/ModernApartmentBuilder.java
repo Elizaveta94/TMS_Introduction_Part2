@@ -1,4 +1,4 @@
-package com.tms.patterns.builder.car;
+package com.tms.patterns.builder;
 
 public class ModernApartmentBuilder implements ApartmentBuilder {
     private int bathroom;
