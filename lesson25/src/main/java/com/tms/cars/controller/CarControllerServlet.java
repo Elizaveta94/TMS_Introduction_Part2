@@ -1,4 +1,6 @@
 package com.tms.cars.controller;
+
+import com.tms.cars.bd.CachedCarDBConnector;
 import com.tms.cars.model.Car;
 import com.tms.cars.service.CarService;
 import javax.servlet.RequestDispatcher;
@@ -16,7 +18,7 @@ import java.util.List;
 @WebServlet("/")
 public class CarControllerServlet extends HttpServlet {
 
-    private CarService carService = CarService.getInstance();
+    private final CarService carService = new CarService(new CachedCarDBConnector());
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -31,7 +33,7 @@ public class CarControllerServlet extends HttpServlet {
         String brand = req.getParameter("brand");
         String model = req.getParameter("model");
         Car car = new Car(brand, model, id);
-        car = carService.saveCar(car);
+        carService.saveCar(car);
         List<Car> cars = carService.getAllCars();
         req.setAttribute("cars", cars);
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/index.jsp");
