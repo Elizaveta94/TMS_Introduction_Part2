@@ -1,9 +1,11 @@
 package com.tms.service;
 
 import com.tms.model.Pair;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class RideService {
     public int sumSpeed(Pair pair) {
         return pair.getHorse().getSpeed() + pair.getRider().getLevel();

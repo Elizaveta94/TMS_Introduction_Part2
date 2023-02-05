@@ -2,12 +2,12 @@ package com.tms;
 
 import com.tms.service.RideManagerService;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
-        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-        RideManagerService rideManagerService = (RideManagerService) context.getBean("rideManagerService");
+        ApplicationContext context = new AnnotationConfigApplicationContext("com.tms.model","com.tms.service");
+        RideManagerService rideManagerService = context.getBean(RideManagerService.class);
         rideManagerService.bet();
     }
 }
