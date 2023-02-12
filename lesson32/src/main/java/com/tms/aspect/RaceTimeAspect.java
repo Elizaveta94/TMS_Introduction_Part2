@@ -3,12 +3,17 @@ package com.tms.aspect;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
 @Component
 @Aspect
 public class RaceTimeAspect {
-    @Around("execution(* com.tms.service.RideService.ride())")
+    @Pointcut("@annotation(com.tms.annotation.TimeCheck)")
+    public void pointCutForTimeCheck() {
+    }
+
+    @Around("pointCutForTimeCheck()")
     public Object printRaceTime(ProceedingJoinPoint joinPoint) throws Throwable {
         long start = System.currentTimeMillis();
         Object result = joinPoint.proceed();
