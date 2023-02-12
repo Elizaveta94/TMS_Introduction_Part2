@@ -9,11 +9,8 @@ import org.springframework.stereotype.Component;
 @Component
 @Aspect
 public class RaceTimeAspect {
-    @Pointcut("@annotation(com.tms.annotation.TimeCheck)")
-    public void pointCutForTimeCheck() {
-    }
 
-    @Around("pointCutForTimeCheck()")
+    @Around("@annotation(com.tms.annotation.TimeCheck)")
     public Object printRaceTime(ProceedingJoinPoint joinPoint) throws Throwable {
         long start = System.currentTimeMillis();
         Object result = joinPoint.proceed();
