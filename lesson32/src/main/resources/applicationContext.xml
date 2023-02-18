@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    ">
+    <bean id="rider" class="com.tms.model.Rider" scope="prototype"/>
+
+    <bean id="horse" class="com.tms.model.Horse" scope="prototype"/>
+
+    <bean id="pair" class="com.tms.model.Pair" scope="prototype">
+        <constructor-arg index="0" ref="horse"/>
+        <constructor-arg index="1" ref="rider"/>
+    </bean>
+
+    <bean id="rideService" class="com.tms.service.RideService"/>
+
+    <bean id="rideManagerService" class="com.tms.service.RideManagerService">
+        <constructor-arg index="0" ref="pair"/>
+        <constructor-arg index="1" ref="pair"/>
+        <constructor-arg index="2" ref="pair"/>
+        <constructor-arg index="3" ref="rideService"/>
+    </bean>
+</beans>
