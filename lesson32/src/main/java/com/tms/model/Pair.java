@@ -1,7 +1,12 @@
 package com.tms.model;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import java.util.Objects;
 
+@Component("pair")
+@Scope("prototype")
 public class Pair {
     private Horse horse;
     private Rider rider;

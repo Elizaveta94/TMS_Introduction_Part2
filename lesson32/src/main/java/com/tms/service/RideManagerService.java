@@ -1,10 +1,12 @@
 package com.tms.service;
 
 import com.tms.model.Pair;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Scanner;
 
+@Service
 public class RideManagerService {
     private Pair pair1;
     private Pair pair2;

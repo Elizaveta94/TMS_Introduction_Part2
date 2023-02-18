@@ -1,8 +1,13 @@
 package com.tms.model;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import java.util.Objects;
 import java.util.Random;
 
+@Component("rider")
+@Scope("prototype")
 public class Rider {
     private int level;
 
