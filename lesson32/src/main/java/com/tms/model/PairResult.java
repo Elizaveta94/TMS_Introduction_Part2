@@ -5,8 +5,7 @@ import lombok.Data;
 
 @AllArgsConstructor
 @Data
-public class Pair {
-    private Horse horse;
-    private Rider rider;
-    private int number;
+public class PairResult {
+    private Pair pair;
+    private int place;
 }

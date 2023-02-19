@@ -15,6 +15,11 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
     implementation 'org.springframework:spring-context:6.0.4'
     implementation 'org.springframework:spring-aspects:6.0.4'
+    implementation group: 'org.springframework', name: 'spring-webmvc', version: '5.3.25'
+    compileOnly group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
+
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
 }
 
 test {

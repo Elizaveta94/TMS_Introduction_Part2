@@ -3,10 +3,10 @@ package com.tms.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.List;
+
 @AllArgsConstructor
 @Data
-public class Pair {
-    private Horse horse;
-    private Rider rider;
-    private int number;
+public class RideResult {
+    private List<CircleResult> circleResults;
 }
