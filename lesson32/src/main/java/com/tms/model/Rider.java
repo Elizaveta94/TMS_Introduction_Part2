@@ -1,45 +1,19 @@
 package com.tms.model;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+import lombok.Data;
 
-import java.util.Objects;
 import java.util.Random;
 
-@Component("rider")
-@Scope("prototype")
+@Data
 public class Rider {
     private int level;
+    private int number;
+    private int win;
 
-    public Rider() {
+    public Rider(int number) {
         this.level = new Random().nextInt(1, 10);
-    }
+        this.number = number;
+        this.win = new Random().nextInt(0, 10);
 
-    public int getLevel() {
-        return level;
-    }
-
-    public void setLevel(int level) {
-        this.level = level;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Rider rider = (Rider) o;
-        return level == rider.level;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(level);
-    }
-
-    @Override
-    public String toString() {
-        return "Rider{" +
-                "level=" + level +
-                '}';
     }
 }
