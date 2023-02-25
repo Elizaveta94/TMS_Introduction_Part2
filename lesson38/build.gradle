@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+}
+
+group 'com.tms'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+
+    implementation 'org.postgresql:postgresql:42.5.4'
+
+    implementation 'org.springframework:spring-context:5.3.24'
+
+    implementation group: 'org.hibernate', name: 'hibernate-entitymanager', version: '5.6.15.Final'
+}
+
+test {
+    useJUnitPlatform()
+}
