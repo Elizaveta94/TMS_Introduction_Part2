@@ -6,6 +6,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Objects;
+
 @ToString
 @Setter
 @Getter
@@ -19,6 +20,9 @@ public class CourseEntity {
 
     @OneToOne(mappedBy = "courseEntity")
     private TeacherEntity teacherEntity;
+
+    public CourseEntity() {
+    }
 
     @Override
     public int hashCode() {

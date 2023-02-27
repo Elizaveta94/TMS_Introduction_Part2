@@ -20,7 +20,7 @@ public class TeacherEntity {
     private String name;
     private Boolean remote;
     @Column(name = "start_date")
-    @Temporal(TemporalType.TIME)
+    @Temporal(TemporalType.DATE)
     private Date startDate;
     @Embedded
     private Address address;
