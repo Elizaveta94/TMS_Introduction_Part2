@@ -5,7 +5,6 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @NoArgsConstructor
 @ToString
@@ -30,7 +29,7 @@ public class CourseEntity {
             joinColumns = {@JoinColumn(name = "course_id")},
             inverseJoinColumns = {@JoinColumn(name = "student_id")}
     )
-    private Set<StudentEntity> students;
+    private List<StudentEntity> students;
 
     @Override
     public int hashCode() {

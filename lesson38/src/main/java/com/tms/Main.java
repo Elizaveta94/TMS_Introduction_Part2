@@ -33,11 +33,11 @@ public class Main {
         StudentEntity studentEntity4 = createStudentEntity("Alla");
         StudentEntity studentEntity5 = createStudentEntity("Liza");
 
-        teacherEntity1.setCourses(Set.of(courseEntity1, courseEntity2, courseEntity3));
+        teacherEntity1.setCourses(List.of(courseEntity1, courseEntity2, courseEntity3));
 
-        courseEntity1.setStudents(Set.of(studentEntity1, studentEntity3));
-        courseEntity2.setStudents(Set.of(studentEntity1, studentEntity4, studentEntity5));
-        courseEntity3.setStudents(Set.of(studentEntity2, studentEntity4));
+        courseEntity1.setStudents(List.of(studentEntity1, studentEntity3));
+        courseEntity2.setStudents(List.of(studentEntity1, studentEntity4, studentEntity5));
+        courseEntity3.setStudents(List.of(studentEntity2, studentEntity4));
 
         teacherService.save(teacherEntity1);
 

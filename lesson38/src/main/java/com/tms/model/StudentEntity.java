@@ -8,7 +8,6 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @NoArgsConstructor
 @ToString
@@ -24,7 +23,7 @@ public class StudentEntity {
 
     @ManyToMany(mappedBy = "students", fetch = FetchType.LAZY)
     @ToString.Exclude
-    private Set<CourseEntity> course;
+    private List<CourseEntity> course;
 
     @Override
     public int hashCode() {
