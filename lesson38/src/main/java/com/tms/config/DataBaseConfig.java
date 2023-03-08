@@ -1,6 +1,7 @@
 package com.tms.config;
 
 import com.tms.model.CourseEntity;
+import com.tms.model.StudentEntity;
 import com.tms.model.TeacherEntity;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Environment;
@@ -27,6 +28,7 @@ public class DataBaseConfig {
 
         configuration.addAnnotatedClass(TeacherEntity.class);
         configuration.addAnnotatedClass(CourseEntity.class);
+        configuration.addAnnotatedClass(StudentEntity.class);
 
         return configuration.buildSessionFactory();
     }

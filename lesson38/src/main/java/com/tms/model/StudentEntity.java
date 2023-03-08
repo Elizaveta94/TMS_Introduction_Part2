@@ -6,7 +6,6 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -16,21 +15,16 @@ import java.util.Set;
 @Setter
 @Getter
 @Entity
-@Table(name = "teacher")
-public class TeacherEntity {
+@Table(name = "student")
+public class StudentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private Boolean remote;
-    @Column(name = "start_date")
-    @Temporal(TemporalType.DATE)
-    private Date startDate;
-    @Embedded
-    private Address address;
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "teacher_id")
-    private Set<CourseEntity> courses;
+
+    @ManyToMany(mappedBy = "students", fetch = FetchType.LAZY)
+    @ToString.Exclude
+    private Set<CourseEntity> course;
 
     @Override
     public int hashCode() {
@@ -45,7 +39,8 @@ public class TeacherEntity {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        TeacherEntity other = (TeacherEntity) obj;
+        StudentEntity other = (StudentEntity) obj;
         return Objects.equals(id, other.getId());
     }
+
 }

@@ -1,12 +1,13 @@
 package com.tms.model;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
+@NoArgsConstructor
 @ToString
 @Setter
 @Getter
@@ -18,11 +19,18 @@ public class CourseEntity {
     private Long id;
     private String name;
 
-    @OneToOne(mappedBy = "courseEntity")
-    private TeacherEntity teacherEntity;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "teacher_id", insertable = false, updatable = false)
+    @ToString.Exclude
+    private TeacherEntity teacher;
 
-    public CourseEntity() {
-    }
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "course_student",
+            joinColumns = {@JoinColumn(name = "course_id")},
+            inverseJoinColumns = {@JoinColumn(name = "student_id")}
+    )
+    private Set<StudentEntity> students;
 
     @Override
     public int hashCode() {
@@ -40,4 +48,5 @@ public class CourseEntity {
         CourseEntity other = (CourseEntity) obj;
         return Objects.equals(id, other.getId());
     }
+
 }
