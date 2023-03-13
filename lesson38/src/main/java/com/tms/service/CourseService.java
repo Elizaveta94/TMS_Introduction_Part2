@@ -16,9 +16,6 @@ public class CourseService {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         session.save(courseEntity);
-        if (courseEntity.getTeacherEntity() != null) {
-            session.saveOrUpdate(courseEntity.getTeacherEntity());
-        }
         transaction.commit();
         session.close();
     }
@@ -37,9 +34,6 @@ public class CourseService {
         Transaction transaction = session.beginTransaction();
         CourseEntity courseEntity = session.find(CourseEntity.class, id);
         session.delete(courseEntity);
-        if (courseEntity.getTeacherEntity() != null) {
-            session.delete(courseEntity.getTeacherEntity());
-        }
         transaction.commit();
         session.close();
     }

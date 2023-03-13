@@ -1,5 +1,7 @@
 package com.tms.service;
 
+import com.tms.model.CourseEntity;
+import com.tms.model.StudentEntity;
 import com.tms.model.TeacherEntity;
 import lombok.AllArgsConstructor;
 import org.hibernate.Session;
@@ -7,33 +9,26 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Service;
 
-
 @Service
 @AllArgsConstructor
-public class TeacherService {
+public class StudentService {
     private final SessionFactory sessionFactory;
 
-
-    public void save(TeacherEntity teacherEntity) {
+    public StudentEntity subscribeToCourse(StudentEntity studentEntity, CourseEntity courseEntity) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        session.save(teacherEntity);
+        courseEntity.getStudents().add(studentEntity);
+        session.saveOrUpdate(courseEntity);
         transaction.commit();
         session.close();
+        return studentEntity;
     }
 
-    public TeacherEntity get(Long id) {
-        Session session = sessionFactory.openSession();
-        TeacherEntity teacherEntity = session.find(TeacherEntity.class, id);
-        session.close();
-        return teacherEntity;
-    }
-
-    public void delete(Long id) {
+    public void unsubscribeFromCourse(StudentEntity studentEntity, CourseEntity courseEntity) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        TeacherEntity teacherEntity = session.find(TeacherEntity.class, id);
-        session.delete(teacherEntity);
+        courseEntity.getStudents().remove(studentEntity);
+        session.saveOrUpdate(courseEntity);
         transaction.commit();
         session.close();
     }

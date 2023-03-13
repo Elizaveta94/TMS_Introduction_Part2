@@ -1,13 +1,18 @@
 package com.tms.model;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
+@NoArgsConstructor
 @ToString
 @Setter
 @Getter
@@ -24,10 +29,10 @@ public class TeacherEntity {
     private Date startDate;
     @Embedded
     private Address address;
-    @OneToOne
-    @JoinColumn(name = "course_id")
-    @ToString.Exclude
-    private CourseEntity courseEntity;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "teacher_id")
+    @Fetch(FetchMode.SUBSELECT)
+    private List<CourseEntity> courses;
 
     @Override
     public int hashCode() {

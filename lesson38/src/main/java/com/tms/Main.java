@@ -2,25 +2,24 @@ package com.tms;
 
 import com.tms.model.Address;
 import com.tms.model.CourseEntity;
+import com.tms.model.StudentEntity;
 import com.tms.model.TeacherEntity;
 import com.tms.service.CourseService;
+import com.tms.service.StudentService;
 import com.tms.service.TeacherService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import java.util.Date;
-import java.util.Random;
+import java.util.*;
 
 public class Main {
-    public void main(String[] args) {
+    public static void main(String[] args) {
         ApplicationContext context = new AnnotationConfigApplicationContext("com.tms");
         TeacherService teacherService = context.getBean(TeacherService.class);
         CourseService courseService = context.getBean(CourseService.class);
+        StudentService studentService = context.getBean(StudentService.class);
+
         TeacherEntity teacherEntity1 = createTeacherEntity("Pavel");
-
-        TeacherEntity teacherEntity2 = createTeacherEntity("Maria");
-
-        TeacherEntity teacherEntity3 = createTeacherEntity("Alexandr");
 
         CourseEntity courseEntity1 = createCourseEntity("Java");
 
@@ -28,31 +27,30 @@ public class Main {
 
         CourseEntity courseEntity3 = createCourseEntity("C++");
 
-        teacherEntity2.setCourseEntity(courseEntity1);
+        StudentEntity studentEntity1 = createStudentEntity("Petr");
+        StudentEntity studentEntity2 = createStudentEntity("Ivan");
+        StudentEntity studentEntity3 = createStudentEntity("Anna");
+        StudentEntity studentEntity4 = createStudentEntity("Alla");
+        StudentEntity studentEntity5 = createStudentEntity("Liza");
 
-        courseEntity3.setTeacherEntity(teacherEntity1);
+        teacherEntity1.setCourses(List.of(courseEntity1, courseEntity2, courseEntity3));
+
+        courseEntity1.setStudents(List.of(studentEntity1, studentEntity3));
+        courseEntity2.setStudents(List.of(studentEntity1, studentEntity4, studentEntity5));
+        courseEntity3.setStudents(List.of(studentEntity2, studentEntity4));
 
         teacherService.save(teacherEntity1);
-        teacherService.save(teacherEntity2);
-        teacherService.save(teacherEntity3);
-        courseService.save(courseEntity1);
-        courseService.save(courseEntity2);
-        courseService.save(courseEntity3);
-        System.out.println("-----------------------------------");
 
-        TeacherEntity teacherEntity = teacherService.get(2L);
-        System.out.println(teacherEntity);
-        CourseEntity courseEntity = courseService.get(3L);
-        System.out.println(courseEntity);
-        courseEntity = courseService.get(1L);
-        System.out.println(courseEntity);
-        teacherService.delete(2L);
-        courseEntity = courseService.get(1L);
-        System.out.println(courseEntity);
-        teacherEntity = teacherService.get(2L);
+        System.out.println("-----------------------------------");
+        System.out.println(teacherService.get(teacherEntity1.getId()));
+        CourseEntity coursePython = courseService.get(courseEntity2.getId());
+        CourseEntity courseJava = courseService.get(courseEntity1.getId());
+        studentService.unsubscribeFromCourse(studentEntity5,coursePython);
+        studentService.subscribeToCourse(studentEntity5,courseJava);
+        System.out.println(teacherService.get(teacherEntity1.getId()));
     }
 
-    public TeacherEntity createTeacherEntity(String name) {
+    public static TeacherEntity createTeacherEntity(String name) {
         TeacherEntity teacherEntity = new TeacherEntity();
         teacherEntity.setName(name);
         teacherEntity.setRemote(new Random().nextBoolean());
@@ -61,10 +59,16 @@ public class Main {
         return teacherEntity;
     }
 
-    public CourseEntity createCourseEntity(String name) {
+    public static CourseEntity createCourseEntity(String name) {
         CourseEntity courseEntity = new CourseEntity();
         courseEntity.setName(name);
         return courseEntity;
+    }
+
+    public static StudentEntity createStudentEntity(String name) {
+        StudentEntity studentEntity = new StudentEntity();
+        studentEntity.setName(name);
+        return studentEntity;
     }
 
 }

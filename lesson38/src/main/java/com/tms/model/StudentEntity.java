@@ -1,6 +1,9 @@
 package com.tms.model;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
@@ -11,25 +14,16 @@ import java.util.Objects;
 @Setter
 @Getter
 @Entity
-@Table(name = "course")
-public class CourseEntity {
+@Table(name = "student")
+public class StudentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "teacher_id", insertable = false, updatable = false)
+    @ManyToMany(mappedBy = "students", fetch = FetchType.LAZY)
     @ToString.Exclude
-    private TeacherEntity teacher;
-
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "course_student",
-            joinColumns = {@JoinColumn(name = "course_id")},
-            inverseJoinColumns = {@JoinColumn(name = "student_id")}
-    )
-    private List<StudentEntity> students;
+    private List<CourseEntity> course;
 
     @Override
     public int hashCode() {
@@ -44,7 +38,7 @@ public class CourseEntity {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        CourseEntity other = (CourseEntity) obj;
+        StudentEntity other = (StudentEntity) obj;
         return Objects.equals(id, other.getId());
     }
 
